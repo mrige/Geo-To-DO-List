@@ -14,20 +14,18 @@
 
 </head>
 
+<body>
 
-<input type="text" id="task" placeholder="What do you want to today"></input>
-<br>
-<input type="text" id="search" placeholder="location"> </input>
-</br>
+    Task: <input type="text" id="myTask" value="Type your task here...">
+    <br>
+    Location: <input type="text" id="search" value="Type your location here...">
+    </br>
 
-<br>
 <p id="demo"></p>
-    <input type="date" name="date">
-</br>
 
-   <button type="button" onclick = document.getElementById("demo").innerHTML=date.getFullYear();>
-    Click Me!
-   </button>
+Date/Time: <input type="date" name="Date">
+
+
 
 
 <select name="Hour">
@@ -66,28 +64,33 @@
     <option value="PM">PM</option>
 </select>
 
+
 <h3> Google Map</h3>
 <div id = "map"></div>
 
-<form action="/action_page.php">
-    <br>
-        <input type="submit">
-    </br>
 
-</form>
+
 
 <button type="button" onclick="myFunction()">
-    add
+    Add New Task
 </button>
 
+    <form action="/action_page.php">
+        <br>
+        <input type="submit">
+        </br>
+
+    </form>
 <script>
-    function myFunction() {
-        var para = document.createElement("P");
-        var t = document.createTextNode("This is a paragraph")
-        para.appendChild(para);
-        document.getElementById("demo").appendChild(para);
-    }
+    // function myFunction() {
+    //     var para = document.createElement("P");
+    //     var t = document.createTextNode("This is a paragraph")
+    //     //para.appendChild(para);
+    //    //document.getElementById("myDIV").appendChild(para);
+    //     document.body.appendChild(t);
+    // }
 </script>
+
 
   <script>
 
@@ -119,12 +122,12 @@
               var places = searchBox.getPlaces();
               var bounds = new google.maps.LatLngBounds();
 
-              var locFeat = {
+            /*  var locFeat = {
                   place : places,
                   bound : bounds
-              }
+              };
 
-              locationList.push(locFeat);
+              locationList.push(locFeat);*/
 
               var i, place;
 
