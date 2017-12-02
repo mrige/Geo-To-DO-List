@@ -5,21 +5,24 @@
 
     <title>Todo List</title>
 
+    <style>
+        #map{
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+
 </head>
 
 
-<textarea>
-    Type your task here
-</textarea>
+<input type="text" id="task" placeholder="What do you want to today"></input>
 <br>
-<textarea>
-    Type your location here
-</textarea>
+<input type="text" id="search" placeholder="location"> </input>
 </br>
 
 <br>
 <p id="demo"></p>
-date: <input type="date" name="date">
+    <input type="date" name="date">
 </br>
 
    <button type="button" onclick = document.getElementById("demo").innerHTML=date.getFullYear();>
@@ -63,6 +66,9 @@ date: <input type="date" name="date">
     <option value="PM">PM</option>
 </select>
 
+<h3> Google Map</h3>
+<div id = "map"></div>
+
 <form action="/action_page.php">
     <br>
         <input type="submit">
@@ -82,23 +88,87 @@ date: <input type="date" name="date">
         document.getElementById("demo").appendChild(para);
     }
 </script>
-  <h3> Google Map</h3>
-  <div id = "map"></div>
+
   <script>
+
+      var locationList = [];
       function initMap() {
+
           var uluru = {lat: -25.363, lng: 131.044};
           var map = new google.maps.Map(document.getElementById('map'),{
               zoom: 4,
               center: uluru
           });
+
+
+         var currPos =  getCurrentLocation(map);
+
+
           var marker = new google.maps.Marker({
               position: uluru,
+              map: map,
+              draggable : true
+          });
+          marker.setPosition(currPos);
+
+          // Search For Location
+         var searchBox = new google.maps.places.SearchBox(document.getElementById('search'));
+
+          searchBox.addListener('places_changed', function () {
+
+              var places = searchBox.getPlaces();
+              var bounds = new google.maps.LatLngBounds();
+
+              var locFeat = {
+                  place : places,
+                  bound : bounds
+              }
+
+              locationList.push(locFeat);
+
+              var i, place;
+
+              for (i = 0; place  = places[i]; i++){
+                  bounds.extend(place.geometry.location);
+                  marker.setPosition(place.geometry.location);
+              }
+
+              map.fitBounds(bounds);
+              map.setZoom(15);
+
+          })
+      }
+
+
+      function getCurrentLocation(map){
+          var pos;
+          if (navigator.geolocation){
+              navigator.geolocation.getCurrentPosition(function (position) {
+                  pos = {
+                      lat:position.coords.latitude,
+                      lng:position.coords.longitude
+                  };
+
+                  map.setCenter(pos);
+                  map.setZoom(15);
+              })
+          }
+          return pos;
+      }
+
+      function addMarker(loc){
+          var marker2 = new google.maps.Marker({
+              position: loc,
               map: map
           });
+
       }
+
+
+
   </script>
   <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-wgbFHO4U8xCXqBT_5bBGX0GR8g0FjwU&callback=initMap">
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-wgbFHO4U8xCXqBT_5bBGX0GR8g0FjwU&libraries=places&callback=initMap">
   </script>
 
 </body>
