@@ -1,34 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <!---<script src="js/googleMaps.js"></script> -->
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
+
+    <title>Todo List</title>
+
 </head>
-<body>
-    <h3> Google Map</h3>
-    <div id = "map"></div>
-    <script>
-        function initMap() {
-            var uluru = {lat: -25.363, lng: 131.044};
-            var map = new google.maps.Map(document.getElementById('map'),{
-                zoom: 4,
-                center: uluru
-            });
-            var marker = new google.maps.Marker({
-                position: uluru,
-                map: map
-            });
-        }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-wgbFHO4U8xCXqBT_5bBGX0GR8g0FjwU&callback=initMap">
-    </script>
+
+
+<textarea>
+    Type your task here
+</textarea>
+<br>
+<textarea>
+    Type your location here
+</textarea>
+</br>
+
+<br>
+<p id="demo"></p>
+date: <input type="date" name="date">
+</br>
+
+   <button type="button" onclick = document.getElementById("demo").innerHTML=date.getFullYear();>
+    Click Me!
+   </button>
+
+
+<select name="Hour">
+    <option value = "00">00</option>
+    <option value = "01">01</option>
+    <option value = "02">02</option>
+    <option value = "03">03</option>
+    <option value = "04">04</option>
+    <option value = "05">05</option>
+    <option value = "06">06</option>
+    <option value = "07">07</option>
+    <option value = "08">08</option>
+    <option value = "09">09</option>
+    <option value = "10">10</option>
+    <option value = "11">11</option>
+    <option value = "12">12</option>
+</select>
+<select name="Minutes">
+    <option value = "00">00</option>
+    <option value = "01">01</option>
+    <option value = "02">02</option>
+    <option value = "03">03</option>
+    <option value = "04">04</option>
+    <option value = "05">05</option>
+    <option value = "06">06</option>
+    <option value = "07">07</option>
+    <option value = "08">08</option>
+    <option value = "09">09</option>
+    <option value = "10">10</option>
+    <option value = "11">11</option>
+    <option value = "12">12</option>
+
+</select>
+<select>
+    <option value="AM">AM</option>
+    <option value="PM">PM</option>
+</select>
+
+<form action="/action_page.php">
+    <br>
+        <input type="submit">
+    </br>
+
+</form>
+
+<button type="button" onclick="myFunction()">
+    add
+</button>
+
+<script>
+    function myFunction() {
+        var para = document.createElement("P");
+        var t = document.createTextNode("This is a paragraph")
+        para.appendChild(para);
+        document.getElementById("demo").appendChild(para);
+    }
+</script>
+  <h3> Google Map</h3>
+  <div id = "map"></div>
+  <script>
+      function initMap() {
+          var uluru = {lat: -25.363, lng: 131.044};
+          var map = new google.maps.Map(document.getElementById('map'),{
+              zoom: 4,
+              center: uluru
+          });
+          var marker = new google.maps.Marker({
+              position: uluru,
+              map: map
+          });
+      }
+  </script>
+  <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-wgbFHO4U8xCXqBT_5bBGX0GR8g0FjwU&callback=initMap">
+  </script>
+
 </body>
 </html>
