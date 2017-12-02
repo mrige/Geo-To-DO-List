@@ -7,24 +7,23 @@
 
 </head>
 
+<body>
 
-<textarea>
-    Type your task here
-</textarea>
-<br>
-<textarea>
-    Type your location here
-</textarea>
-</br>
+    Task: <input type="text" id="myTask" value="Type your task here...">
+    <br>
+    Location: <input type="text" id="myLocation" value="Type your location here...">
+    </br>
+<script>
+    function myFunction()
+    {
 
-<br>
+    }
+    </script>
+
+
 <p id="demo"></p>
-date: <input type="date" name="date">
-</br>
+Date/Time: <input type="date" name="Date">
 
-   <button type="button" onclick = document.getElementById("demo").innerHTML=date.getFullYear();>
-    Click Me!
-   </button>
 
 
 <select name="Hour">
@@ -63,25 +62,31 @@ date: <input type="date" name="date">
     <option value="PM">PM</option>
 </select>
 
-<form action="/action_page.php">
-    <br>
-        <input type="submit">
-    </br>
 
-</form>
 
 <button type="button" onclick="myFunction()">
-    add
+    Add New Task
 </button>
 
+    <form action="/action_page.php">
+        <br>
+        <input type="submit">
+        </br>
+
+    </form>
 <script>
-    function myFunction() {
-        var para = document.createElement("P");
-        var t = document.createTextNode("This is a paragraph")
-        para.appendChild(para);
-        document.getElementById("demo").appendChild(para);
-    }
+    // function myFunction() {
+    //     var para = document.createElement("P");
+    //     var t = document.createTextNode("This is a paragraph")
+    //     //para.appendChild(para);
+    //    //document.getElementById("myDIV").appendChild(para);
+    //     document.body.appendChild(t);
+    // }
 </script>
+
+
+
+<!--Ayo code-->
   <h3> Google Map</h3>
   <div id = "map"></div>
   <script>
