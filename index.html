@@ -15,8 +15,10 @@
 </head>
 
 <body>
+    <div id="task">
 
-    Task: <input type="text" id="myTask" value="Type your task here...">
+        Task 1: <input type="text" id="myTask" value="Type your task here...">
+
     <br>
     Location: <input type="text" id="search" value="Type your location here...">
     </br>
@@ -64,14 +66,14 @@ Date/Time: <input type="date" name="Date">
     <option value="PM">PM</option>
 </select>
 
-
+    </div>
 <h3> Google Map</h3>
 <div id = "map"></div>
 
 
 
 
-<button type="button" onclick="myFunction()">
+<button type="button" onclick="addNewTask()">
     Add New Task
 </button>
 
@@ -82,13 +84,21 @@ Date/Time: <input type="date" name="Date">
 
     </form>
 <script>
-    // function myFunction() {
-    //     var para = document.createElement("P");
-    //     var t = document.createTextNode("This is a paragraph")
-    //     //para.appendChild(para);
-    //    //document.getElementById("myDIV").appendChild(para);
-    //     document.body.appendChild(t);
-    // }
+    var counter = 2;
+    var newDiv;
+    function addNewTask(){
+        console.info(document.getElementById('task').childElementCount);
+        if(document.getElementById('task').childElementCount > 0){
+            for(var i = 0 ; i < document.getElementById('task').childElementCount; i++)
+            document.getElementById('task').removeChild(document.getElementById('task').childNodes.item(i));
+        }
+         newDiv = document.createElement('div');
+
+        newDiv.innerHTML =  "Task : " + counter + document.getElementById('task').innerHTML;
+        document.getElementById('task').appendChild(newDiv);
+        counter++;
+    }
+
 </script>
 
 
@@ -104,7 +114,6 @@ Date/Time: <input type="date" name="Date">
           });
 
 
-         var currPos =  getCurrentLocation(map);
 
 
           var marker = new google.maps.Marker({
@@ -112,23 +121,45 @@ Date/Time: <input type="date" name="Date">
               map: map,
               draggable : true
           });
-          marker.setPosition(currPos);
+          var currPos =  getCurrentLoc(map,marker);
 
           // Search For Location
-         var searchBox = new google.maps.places.SearchBox(document.getElementById('search'));
+          searchLoc(map, marker);
+      }
+
+
+      function getCurrentLoc(map,marker){
+
+          if (navigator.geolocation){
+              navigator.geolocation.getCurrentPosition(function (position) {
+                 var pos = {
+                      lat:position.coords.latitude,
+                      lng:position.coords.longitude
+                  };
+
+                  map.setCenter(pos);
+                  map.setZoom(15);
+                  marker.setPosition(pos);
+              })
+          }
+      }
+
+      function searchLoc(map, marker) {
+          var searchBox = new google.maps.places.SearchBox(document.getElementById('search'));
 
           searchBox.addListener('places_changed', function () {
 
               var places = searchBox.getPlaces();
               var bounds = new google.maps.LatLngBounds();
+              console.log(places)
 
-            /*  var locFeat = {
-                  place : places,
-                  bound : bounds
-              };
+              /*  var locFeat = {
+               place : places,
+               bound : bounds
+               };
 
-              locationList.push(locFeat);*/
-
+               locationList.push(locFeat);*/
+            
               var i, place;
 
               for (i = 0; place  = places[i]; i++){
@@ -141,24 +172,6 @@ Date/Time: <input type="date" name="Date">
 
           })
       }
-
-
-      function getCurrentLocation(map){
-          var pos;
-          if (navigator.geolocation){
-              navigator.geolocation.getCurrentPosition(function (position) {
-                  pos = {
-                      lat:position.coords.latitude,
-                      lng:position.coords.longitude
-                  };
-
-                  map.setCenter(pos);
-                  map.setZoom(15);
-              })
-          }
-          return pos;
-      }
-
       function addMarker(loc){
           var marker2 = new google.maps.Marker({
               position: loc,
@@ -171,7 +184,7 @@ Date/Time: <input type="date" name="Date">
 
   </script>
   <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-wgbFHO4U8xCXqBT_5bBGX0GR8g0FjwU&libraries=places&callback=initMap">
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVsTqL5lWOse0tzjvoUq81bD0j1qojqT4&libraries=places&callback=initMap">
   </script>
 
 </body>
