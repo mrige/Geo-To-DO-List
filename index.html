@@ -17,7 +17,7 @@
 <body>
     <div id="task">
 
-        Task 1: <input type="text" id="myTask" value="Type your task here...">
+        Task : 1<input type="text" id="myTask" value="Type your task here...">
 
     <br>
     Location: <input type="text" id="search" value="Type your location here...">
@@ -65,17 +65,15 @@ Date/Time: <input type="date" name="Date">
     <option value="AM">AM</option>
     <option value="PM">PM</option>
 </select>
-
+<br>
     </div>
-<h3> Google Map</h3>
-<div id = "map"></div>
 
 
 
 
-<button type="button" onclick="addNewTask()">
-    Add New Task
-</button>
+    <button type="button" onclick="addNewTask()">
+        Add New Task
+    </button>
 
     <form action="/action_page.php">
         <br>
@@ -83,18 +81,24 @@ Date/Time: <input type="date" name="Date">
         </br>
 
     </form>
+<h3> Google Map</h3>
+<div id = "map"></div>
+
+
+
+
 <script>
     var counter = 2;
     var newDiv;
     function addNewTask(){
         console.info(document.getElementById('task').childElementCount);
-        if(document.getElementById('task').childElementCount > 0){
+       /* if(document.getElementById('task').childElementCount > 0){
             for(var i = 0 ; i < document.getElementById('task').childElementCount; i++)
-            document.getElementById('task').removeChild(document.getElementById('task').childNodes.item(i));
-        }
+                document.getElementById('task').removeChild(document.getElementById('task').childNodes.item(i));
+        }*/
          newDiv = document.createElement('div');
 
-        newDiv.innerHTML =  "Task : " + counter + document.getElementById('task').innerHTML;
+        newDiv.innerHTML =  "Task : " + counter + document.getElementById('taskTemplate').innerHTML;
         document.getElementById('task').appendChild(newDiv);
         counter++;
     }
@@ -159,7 +163,7 @@ Date/Time: <input type="date" name="Date">
                };
 
                locationList.push(locFeat);*/
-            
+
               var i, place;
 
               for (i = 0; place  = places[i]; i++){
@@ -183,7 +187,60 @@ Date/Time: <input type="date" name="Date">
 
 
   </script>
-  <script async defer
+    <div id="taskTemplate" style="display: none">
+
+        <input type="text" id="myTask" value="Type your task here...">
+
+        <br>
+        Location: <input type="text" id="search" value="Type your location here...">
+        </br>
+
+        <p id="demo"></p>
+
+        Date/Time: <input type="date" name="Date">
+
+
+
+
+        <select name="Hour">
+            <option value = "00">00</option>
+            <option value = "01">01</option>
+            <option value = "02">02</option>
+            <option value = "03">03</option>
+            <option value = "04">04</option>
+            <option value = "05">05</option>
+            <option value = "06">06</option>
+            <option value = "07">07</option>
+            <option value = "08">08</option>
+            <option value = "09">09</option>
+            <option value = "10">10</option>
+            <option value = "11">11</option>
+            <option value = "12">12</option>
+        </select>
+        <select name="Minutes">
+            <option value = "00">00</option>
+            <option value = "01">01</option>
+            <option value = "02">02</option>
+            <option value = "03">03</option>
+            <option value = "04">04</option>
+            <option value = "05">05</option>
+            <option value = "06">06</option>
+            <option value = "07">07</option>
+            <option value = "08">08</option>
+            <option value = "09">09</option>
+            <option value = "10">10</option>
+            <option value = "11">11</option>
+            <option value = "12">12</option>
+
+        </select>
+        <select>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+
+        <br>
+    </div>
+
+    <script async defer
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVsTqL5lWOse0tzjvoUq81bD0j1qojqT4&libraries=places&callback=initMap">
   </script>
 
